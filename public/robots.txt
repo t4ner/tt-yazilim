@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Optimize crawling
-Crawl-delay: 10
-
-# Sitemaps
-Sitemap: https://ttyazilim.com.tr/sitemap.xml 
