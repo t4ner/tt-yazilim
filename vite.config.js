@@ -59,6 +59,11 @@ export default defineConfig({
     open: true,
     cors: true,
     compression: true,
+    host: true,
+    port: 8004,
+     watch: {
+       usePolling: true
+     }
   },
   optimizeDeps: {
     include: ["react", "react-dom"],
