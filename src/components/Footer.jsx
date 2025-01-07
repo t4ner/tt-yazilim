@@ -4,26 +4,22 @@ import { socials } from "../constants";
 
 const Footer = () => {
   return (
-    <Section id="iletisim" crosses className="!px-0 !py-10">
-      <div className="container flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
-        <p className="caption text-n-4 lg:block">
-          © {new Date().getFullYear()}. Tüm Hakları Saklıdır.
-        </p>
+    <footer id="iletisim" className="bg-n-8 py-16" role="contentinfo">
+      <div className="container">
+        <nav
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          aria-label="Footer navigasyon"
+        >
+          {/* Footer menüleri */}
+        </nav>
 
-        <ul className="flex gap-5 flex-wrap">
-          {socials.map((item) => (
-            <a
-              key={item.id}
-              href={item.url}
-              target="_blank"
-              className="flex items-center justify-center w-10 h-10 bg-n-7 rounded-full transition-colors hover:bg-n-6"
-            >
-              <img src={item.iconUrl} width={16} height={16} alt={item.title} />
-            </a>
-          ))}
-        </ul>
+        <div className="mt-16 pt-8 border-t border-n-6">
+          <p className="text-n-4 text-center">
+            © {new Date().getFullYear()} TT Yazılım. Tüm hakları saklıdır.
+          </p>
+        </div>
       </div>
-    </Section>
+    </footer>
   );
 };
 

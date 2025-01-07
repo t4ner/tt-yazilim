@@ -4,12 +4,14 @@ import Section from "./Section";
 import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
 import { heroIcons } from "../constants";
 import { ScrollParallax } from "react-just-parallax";
-import { useRef } from "react";
-import Generating from "./Generating";
-import Notification from "./Notification";
-import CompanyLogos from "./CompanyLogos";
+import { useRef, lazy, Suspense, memo } from "react";
+import OptimizedImage from "./OptimizedImage";
 
-const Hero = () => {
+const Generating = lazy(() => import("./Generating"));
+const Notification = lazy(() => import("./Notification"));
+const CompanyLogos = lazy(() => import("./CompanyLogos"));
+
+const Hero = memo(() => {
   const parallaxRef = useRef(null);
 
   return (
@@ -19,26 +21,27 @@ const Hero = () => {
       crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
       id="hero"
+      role="banner"
     >
       <div className="container relative" ref={parallaxRef}>
         <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6.25rem]">
-          <h1 className="h1 mb-6">
-          Hızlı. Şık. Güvenilir. <br />
-          <div className="inline-block relative ">
-             <span className="opacity-0">dsadsasadasdsaöd</span> 
-              <img
-                src={curve}
-                className="absolute top-full right-5 md:right-0 md:left-0 w-full xl:-mt-8"
-                width={624}
-                height={28}
-                alt="Curve"
-              />
-            </div>
+          <h1 className="h1 mb-6" tabIndex="0">
+            Hızlı. Şık. Güvenilir. <br />
+            <span className="sr-only">
+              TT Yazılım - Web Tasarım ve Yazılım Ajansı
+            </span>
           </h1>
           <p className="body-1 mt-10 md:mt-0 text-base max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8 md:text-xl font-mont tracking-wide">
-          Profesyonel ekibimizle, markanızı bir adım öne çıkaracak yaratıcı ve etkili web siteleri tasarlıyoruz. Tanışmak için bizimle iletişime geçebilirsin.
+            Profesyonel ekibimizle, markanızı bir adım öne çıkaracak yaratıcı ve
+            etkili web siteleri tasarlıyoruz. Tanışmak için bizimle iletişime
+            geçebilirsin.
           </p>
-          <Button white href="https://wa.me/905393239896">
+          <Button
+            white
+            href="https://wa.me/905393239896"
+            aria-label="Bizimle iletişime geçin"
+            role="button"
+          >
             BİZE ULAŞIN
           </Button>
         </div>
@@ -48,15 +51,18 @@ const Hero = () => {
               <div className="h-[1.4rem] bg-n-10 rounded-t-[0.9rem]" />
 
               <div className="aspect-[33/40] rounded-b-[0.9rem] overflow-hidden md:aspect-[688/490] lg:aspect-[1024/490]">
-                <img
+                <OptimizedImage
                   src={robot}
                   className="w-full scale-[1.7] translate-y-[8%] md:scale-[1] md:-translate-y-[10%] lg:-translate-y-[23%]"
                   width={1024}
                   height={490}
-                  alt="AI"
+                  alt="TT Yazılım Web Tasarım ve Yazılım Hizmetleri"
+                  loading="eager"
                 />
 
-                <Generating className="absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2" />
+                <Suspense fallback={<div className="loading-placeholder" />}>
+                  <Generating />
+                </Suspense>
 
                 <ScrollParallax isAbsolutelyPositioned>
                   <ul className="hidden absolute -left-[5.5rem] bottom-[7.5rem] px-1 py-1 bg-n-9/40 backdrop-blur border border-n-1/10 rounded-2xl xl:flex">
@@ -68,28 +74,30 @@ const Hero = () => {
                   </ul>
                 </ScrollParallax>
 
-                <ScrollParallax isAbsolutelyPositioned>
+                <Suspense fallback={null}>
                   <Notification
                     className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex tracking-tagline"
                     title="TT YAZILIM"
                   />
-                </ScrollParallax>
+                </Suspense>
               </div>
             </div>
 
             <Gradient />
           </div>
-     
 
           <BackgroundCircles />
         </div>
 
-        <CompanyLogos className="hidden relative z-10 mt-20 lg:block" />
+        <Suspense fallback={null}>
+          <CompanyLogos className="hidden relative z-10 mt-20 lg:block" />
+        </Suspense>
       </div>
 
       <BottomLine />
     </Section>
   );
-};
+});
 
+Hero.displayName = "Hero";
 export default Hero;

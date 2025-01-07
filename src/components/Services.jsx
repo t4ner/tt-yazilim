@@ -13,12 +13,19 @@ import Generating from "./Generating";
 
 const Services = () => {
   return (
-    <Section id="neden-biz" className="mt-12 md:mt-0">
-      <div className="container">
-        <Heading
-          title="Neden TT YAZILIM?"
-          text="Yaratıcı ve işlevsel web tasarımları ile markanızı dijital dünyada öne çıkarın."
-        />
+    <Section
+      id="neden-biz"
+      className="mt-12 md:mt-0"
+      role="region"
+      aria-label="Hizmetlerimiz"
+    >
+      <article className="container">
+        <header>
+          <Heading
+            title="Neden TT YAZILIM?"
+            text="Yaratıcı ve işlevsel web tasarımları ile markanızı dijital dünyada öne çıkarın."
+          />
+        </header>
 
         <div className="relative">
           <div className="relative z-1 flex items-center h-[39rem] mb-5 p-8 border border-n-1/10 rounded-3xl overflow-hidden lg:p-20 xl:h-[46rem]">
@@ -35,7 +42,8 @@ const Services = () => {
             <div className="relative z-1 max-w-[17rem] ml-auto">
               <h4 className="h4 mb-4">Deneyim ve Uzmanlık</h4>
               <p className="body-2 mb-[3rem]  font-mont">
-              Yılların verdiği deneyim ile sektördeki en iyi çözümleri sunuyoruz.
+                Yılların verdiği deneyim ile sektördeki en iyi çözümleri
+                sunuyoruz.
               </p>
               <ul className="body-2">
                 {brainwaveServices.map((item, index) => (
@@ -47,7 +55,7 @@ const Services = () => {
                     <p className="ml-4 font-mont">{item}</p>
                   </li>
                 ))}
-              </ul> 
+              </ul>
             </div>
 
             <Generating className="absolute left-4 right-4 bottom-4 border-n-1/10 border lg:left-1/2 lg-right-auto lg:bottom-8 lg:-translate-x-1/2" />
@@ -68,7 +76,7 @@ const Services = () => {
               <div className="absolute inset-0 flex flex-col justify-end p-8 bg-gradient-to-b from-n-8/0 to-n-8/90 lg:p-15">
                 <h4 className="h4 mb-4">Özgün Tasarımlar</h4>
                 <p className="body-2 mb-[3rem] text-n-3 font-mont">
-                Her projeye özel, benzersiz tasarımlar.
+                  Her projeye özel, benzersiz tasarımlar.
                 </p>
               </div>
 
@@ -79,7 +87,7 @@ const Services = () => {
               <div className="py-12 px-4 xl:px-8">
                 <h4 className="h4 mb-4">Müşteri Memnuniyeti</h4>
                 <p className="body-2 mb-[2rem] text-n-3 font-mont">
-                Müşterilerimizin memnuniyeti bizim için her şeyden önemli.
+                  Müşterilerimizin memnuniyeti bizim için her şeyden önemli.
                 </p>
 
                 <ul className="flex items-center justify-between">
@@ -116,14 +124,13 @@ const Services = () => {
                 />
 
                 <VideoChatMessage />
-               
               </div>
             </div>
           </div>
 
           <Gradient />
         </div>
-      </div>
+      </article>
     </Section>
   );
 };

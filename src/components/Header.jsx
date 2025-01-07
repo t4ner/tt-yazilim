@@ -31,19 +31,38 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50  border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
+      className={`fixed top-0 left-0 w-full z-50 border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
         openNavigation ? "bg-n-8" : "bg-n-8/90 backdrop-blur-sm"
       }`}
+      role="banner"
     >
+      {/* Skip link for accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only">
+        Ana içeriğe atla
+      </a>
+
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-        <a className="block w-[12rem] xl:mr-8" href="#hero">
-          <img src={brainwave} width={190} height={40} alt="Brainwave" />
+        <a
+          className="block w-[12rem] xl:mr-8"
+          href="#hero"
+          aria-label="TT Yazılım Ana Sayfa"
+        >
+          <img
+            src={brainwave}
+            width={190}
+            height={40}
+            alt="TT Yazılım Logo"
+            loading="eager"
+            fetchpriority="high"
+          />
         </a>
 
         <nav
           className={`${
             openNavigation ? "flex" : "hidden"
           } fixed top-[5rem] left-0 right-0 bottom-0 bg-n-8 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+          role="navigation"
+          aria-label="Ana navigasyon"
         >
           <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
@@ -58,8 +77,12 @@ const Header = () => {
                     ? "z-2 lg:text-n-1"
                     : "lg:text-n-1/50"
                 } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
+                aria-current={item.url === pathname.hash ? "page" : undefined}
               >
                 {item.title}
+                {item.url === pathname.hash && (
+                  <span className="sr-only">(mevcut sayfa)</span>
+                )}
               </a>
             ))}
           </div>
@@ -67,7 +90,11 @@ const Header = () => {
           <HamburgerMenu />
         </nav>
 
-        <Button className="hidden lg:flex" href="https://wa.me/905393239896" >
+        <Button
+          className="hidden lg:flex"
+          href="https://wa.me/905393239896"
+          aria-label="WhatsApp üzerinden iletişime geçin"
+        >
           BİZE ULAŞIN
         </Button>
 
@@ -75,6 +102,9 @@ const Header = () => {
           className="ml-auto lg:hidden"
           px="px-3"
           onClick={toggleNavigation}
+          aria-label={openNavigation ? "Menüyü kapat" : "Menüyü aç"}
+          aria-expanded={openNavigation}
+          aria-controls="mobile-navigation"
         >
           <MenuSvg openNavigation={openNavigation} />
         </Button>
