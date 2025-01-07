@@ -1,1 +1,0 @@
-import{j as s,u as e}from"./components-DpjlM-_6.js";import"./vendor-CgDN6SX1.js";import"./utils-0S4fFhTi.js";const t=({className:t})=>s.jsxs("div",{className:`flex items-center h-[3.5rem] font-medium text-lg px-6 bg-n-8/80 rounded-[1.7rem] ${t||""} text-base`,children:[s.jsx("img",{className:"w-5 h-5 mr-4",src:e,alt:"Loading"}),"Dijital Çözüm Ortağınız"]});export{t as default};

@@ -1,64 +1,61 @@
-import { lazy, Suspense, memo } from "react";
+import { lazy, Suspense, memo, useEffect } from "react";
 import ButtonGradient from "./assets/svg/ButtonGradient";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 
-// Lazy loading ile bileşenleri yükleme
-const Benefits = lazy(() => import("./components/Benefits"));
-const Collaboration = lazy(() => import("./components/Collaboration"));
-const Pricing = lazy(() => import("./components/Pricing"));
-const Roadmap = lazy(() => import("./components/Roadmap"));
+// Daha küçük chunk'lar için route-based code splitting
+const Benefits = lazy(() =>
+  import("./components/Benefits" /* webpackChunkName: "benefits" */)
+);
+const Collaboration = lazy(() =>
+  import("./components/Collaboration" /* webpackChunkName: "collaboration" */)
+);
+const Pricing = lazy(() =>
+  import("./components/Pricing" /* webpackChunkName: "pricing" */)
+);
+const Roadmap = lazy(() =>
+  import("./components/Roadmap" /* webpackChunkName: "roadmap" */)
+);
 
-const LoadingFallback = () => (
+// Performanslı loading component
+const LoadingFallback = memo(() => (
   <div className="flex items-center justify-center min-h-[200px]">
     <div className="loading-spinner" />
   </div>
-);
+));
+
+// Route bazlı component yükleme
+const RouteBasedSuspense = memo(({ children }) => (
+  <Suspense fallback={<LoadingFallback />}>{children}</Suspense>
+));
 
 const App = memo(() => {
+  useEffect(() => {
+    // Loading ekranını kaldır
+    const loadingScreen = document.getElementById("loading");
+    if (loadingScreen) {
+      // Yumuşak bir geçiş için fade-out efekti
+      loadingScreen.style.transition = "opacity 0.5s";
+      loadingScreen.style.opacity = "0";
+      setTimeout(() => {
+        loadingScreen.style.display = "none";
+      }, 500);
+    }
+  }, []);
+
   return (
     <>
-      <script type="application/ld+json">
-        {`
-          {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "TT Yazılım",
-            "description": "Profesyonel web tasarım, yazılım geliştirme ve dijital pazarlama hizmetleri",
-            "url": "https://ttyazilim.com.tr/",
-            "logo": "https://ttyazilim.com.tr/logo.png",
-            "image": "https://ttyazilim.com.tr/og-image.jpg",
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+90-539-323-9896",
-              "contactType": "customer service",
-              "areaServed": "TR",
-              "availableLanguage": "Turkish"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "TR"
-            },
-            "sameAs": [
-              "https://instagram.com/tt_yazilim",
-              "https://facebook.com/ttyazilim",
-              "https://linkedin.com/company/ttyazilim"
-            ]
-          }
-        `}
-      </script>
-
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
         <Header />
         <main id="main-content" role="main">
           <Hero />
-          <Suspense fallback={<LoadingFallback />}>
+          <RouteBasedSuspense>
             <Benefits />
             <Collaboration />
             <Pricing />
             <Roadmap />
-          </Suspense>
+          </RouteBasedSuspense>
         </main>
         <Footer />
       </div>

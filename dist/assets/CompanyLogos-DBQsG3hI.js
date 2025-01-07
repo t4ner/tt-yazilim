@@ -1,0 +1,1 @@
+import{j as e}from"./index-CD7_PZKS.js";import"./vendor-BFRzxQZa.js";const s=({className:s})=>e.jsx("div",{className:s,children:e.jsx("h5",{className:"tagline mb-6 text-center text-lg text-n-1/50",children:"TT YAZILIM & DANIŞMANLIK AJANSI"})});export{s as default};

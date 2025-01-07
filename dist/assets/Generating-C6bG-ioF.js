@@ -1,0 +1,1 @@
+import{j as e}from"./index-CD7_PZKS.js";import"./vendor-BFRzxQZa.js";const s=({className:s})=>e.jsxs("div",{className:`flex items-center h-[3.5rem] font-medium text-lg px-6 bg-n-8/80 rounded-[1.7rem] ${s||""} text-base`,children:[e.jsx("img",{className:"w-5 h-5 mr-4",src:"/assets/loading-CllQEGx_.png",alt:"Loading"}),"Dijital Çözüm Ortağınız"]});export{s as default};
