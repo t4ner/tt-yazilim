@@ -14,6 +14,7 @@
     "lighthouse": "lighthouse http://localhost:3000 --view"
   },
   "dependencies": {
+    "npm-upgrade": "^2.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-just-parallax": "^3.1.16",
